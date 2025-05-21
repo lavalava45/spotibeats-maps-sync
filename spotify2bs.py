@@ -151,7 +151,8 @@ def download_and_extract(bs_id: str, artist: str, track: str):
     zip_url = f"https://beatsaver.com/api/download/key/{bs_id}"
     r = requests.get(zip_url, headers=HEAD, timeout=30)
     if r.status_code != 200:
-        logging.error("Failed to download map %s: HTTP %d", bs_id, r.status_code)\n        return False
+        logging.error("Failed to download map %s: HTTP %d", bs_id, r.status_code)
+        return False
     r.raise_for_status()
 
     artist_clean = re.sub(r"[^A-Za-z0-9- ]", "", artist).strip().replace(" ", "_")
@@ -168,6 +169,7 @@ def download_and_extract(bs_id: str, artist: str, track: str):
         z.extractall(dest_dir)
     zip_path.unlink()
     return True
+
 
 # Main loop: search and download maps
 def main():
